@@ -1,19 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_wr_inc_pr_thgs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 12:13:09 by antomart          #+#    #+#             */
-/*   Updated: 2020/06/16 07:50:35 by antomart         ###   ########.fr       */
+/*   Created: 2020/02/22 09:15:25 by antomart          #+#    #+#             */
+/*   Updated: 2020/06/22 14:28:59 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+void	wr_inc_pr_spc(t_env *ptr)
 {
-	free(*ap);
-	*ap = NULL;
+	write(1, " ", 1);
+	(ptr->wr)++;
+}
+
+void	wr_inc_pr_min(t_env *ptr)
+{
+	write(1, "-", 1);
+	(ptr->wr)++;
+}
+
+void	wr_inc_pr_zer(t_env *ptr)
+{
+	write(1, "0", 1);
+	(ptr->wr)++;
+}
+
+void	wr_inc_pr_str(char *str, t_env *ptr)
+{
+	while (str[ptr->pr_i])
+	{
+		write(1, &str[ptr->pr_i], 1);
+		ptr->wr++;
+		ptr->pr_i++;
+	}
 }

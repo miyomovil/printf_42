@@ -6,21 +6,44 @@
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 13:33:29 by antomart          #+#    #+#             */
-/*   Updated: 2020/02/11 09:48:20 by antomart         ###   ########.fr       */
+/*   Updated: 2020/06/22 13:53:44 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define GET_NEXT_LINE_BONUS_H
+# define BUFFER_SIZE 256
+
 # include <string.h>
+# include <stdio.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <limits.h>
 
 typedef	struct	s_list
 {
 	void			*content;
 	struct s_list	*next;
 }				t_list;
+
+typedef	struct	s_printf
+{
+	int	cnt;
+	int	i;
+	int n;
+	int	width;
+	int	min;
+	int prec;
+	int zer;
+	int wr;
+	int pr_i;
+	int flag_pw;
+	int flag_pm;
+
+}				t_env;
 
 void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memset(void *b, int c, size_t len);
@@ -49,7 +72,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strnew(size_t size);
-char			*ft_substr(char const *s, unsigned int start, size_t len);
+char			*ft_substr_1(char const *s, unsigned int start, size_t len);
 char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -81,5 +104,50 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 		void (*del)(void *));
 void			*ft_clear_lst(t_list *l, t_list *last, void (*del)(void *));
+int				get_next_line(int fd, char **line);
+char			*strjoin_and_free(char *s1, char *s2);
+int				find_index(const char *s, int c);
+int				get_line(char **str, char **line, int i);
+size_t			ft_strlen(const char *s);
+int				ft_printf(const char *str, ...);
+void			ft_print_char(va_list list, t_env *ptr);
+void			ft_print_int(int nbr, t_env *ptr);
+void			ft_print_min_zer(int *nbr, int len, t_env *ptr);
+void			ft_print_prec(int nbr, t_env *ptr);
+void			ft_print_str(va_list list, t_env *ptr);
+void			ft_print_nbr(int nbr, t_env *ptr);
+void			ft_print_ulprec2(unsigned long int nbr, t_env *ptr);
+void			ft_print_ulprec(unsigned long int nbr, t_env *ptr);
+void			ft_print_ulmin_uzer(unsigned long int *nbr,
+					int len, t_env *ptr);
+void			ft_print_low_hex_nbr(unsigned long int nbr, t_env *ptr);
+void			ft_print_up_hex_nbr(unsigned long nbr, t_env *ptr);
+void			ft_print_low_hex(unsigned long int nbr, t_env *ptr);
+void			ft_print_up_hex(unsigned long nbr, t_env *ptr);
+void			ft_print_uint(unsigned int nbr, t_env *ptr);
+void			ft_print_point(unsigned long int nbr, t_env *ptr);
+void			ft_print_low_ptr(unsigned long int nbr, t_env *ptr);
+void			ft_print_opt(char opt, va_list list, t_env *ptr);
+void			ft_print_prec(int nbr, t_env *ptr);
+void			ft_init_flags(t_env *ptr);
+void			ft_init_flags2(t_env *ptr);
+int				ft_print_bl_spac(int len, t_env *ptr);
+int				ft_get_spa(char *str, t_env *ptr);
+void			long_int_min_spc(t_env *ptr);
+int				ft_flag_switch(const char *str, t_env *ptr, va_list args);
+void			ft_flag_check_width(const char *str, t_env *ptr, va_list args);
+void			ft_flag_check_prec(const char *str, t_env *ptr, va_list args);
+void			ft_flag_check_min(const char *str, t_env *ptr, va_list args);
+void			ft_flag_check_zer(const char *str, t_env *ptr, va_list args);
+int				ft_get_atr_nbr(const char *str, t_env *ptr);
+void			ft_print_nbr2(long nb, char c, t_env *ptr);
+int				ft_get_atr_length(long int nbr);
+void			wr_inc_pr_spc(t_env *ptr);
+void			wr_inc_pr_min(t_env *ptr);
+void			wr_inc_pr_zer(t_env *ptr);
+void			i_n_wr_inc(t_env *ptr);
+void			wr_mem_st(t_env *ptr);
+void			wr_inc_pr_str(char *str, t_env *ptr);
+void			ft_print_perc(va_list list, t_env *ptr);
 
 #endif

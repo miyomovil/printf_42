@@ -1,19 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 12:13:09 by antomart          #+#    #+#             */
-/*   Updated: 2020/06/16 07:50:35 by antomart         ###   ########.fr       */
+/*   Created: 2020/02/22 10:17:11 by antomart          #+#    #+#             */
+/*   Updated: 2020/06/22 14:24:22 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+void	ft_print_char_width(t_env *ptr)
 {
-	free(*ap);
-	*ap = NULL;
+	int i;
+
+	i = 0;
+	while (i < ptr->width - 1)
+	{
+		if (ptr->zer == 1)
+			write(1, "0", 1);
+		else
+			write(1, " ", 1);
+		ptr->wr++;
+		i++;
+	}
+}
+
+void	ft_print_char(va_list list, t_env *ptr)
+{
+	char c;
+
+	c = va_arg(list, int);
+	if (ptr->width != -1 && ptr->min != 1)
+		ft_print_char_width(ptr);
+	write(1, &c, 1);
+	if (ptr->width != 1 && ptr->min == 1)
+		ft_print_char_width(ptr);
+	ptr->wr++;
 }

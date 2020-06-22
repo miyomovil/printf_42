@@ -6,7 +6,7 @@
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/14 12:34:49 by antomart          #+#    #+#             */
-/*   Updated: 2020/01/14 15:24:00 by antomart         ###   ########.fr       */
+/*   Updated: 2020/06/16 07:49:44 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		while (s1[i + nd - 1]
 				&& ft_strchr(set, s1[i + nd - 1]) != NULL)
 			nd--;
-	return (ft_substr(s1, i, nd));
+	return (ft_substr_1(s1, i, nd));
 }

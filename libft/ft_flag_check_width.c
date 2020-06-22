@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memdel.c                                        :+:      :+:    :+:   */
+/*   ft_flag_check_width.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/18 12:13:09 by antomart          #+#    #+#             */
-/*   Updated: 2020/06/16 07:50:35 by antomart         ###   ########.fr       */
+/*   Created: 2020/02/21 14:58:44 by antomart          #+#    #+#             */
+/*   Updated: 2020/06/22 14:26:02 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_memdel(void **ap)
+void	ft_flag_check_width(const char *str, t_env *ptr, va_list args)
 {
-	free(*ap);
-	*ap = NULL;
+	if (str[ptr->cnt] == '*')
+	{
+		ptr->width = va_arg(args, int);
+		if (ptr->width < 0)
+		{
+			ptr->width = -(ptr->width);
+			ptr->min = 1;
+			if (ptr->zer == 1)
+				ptr->zer = -1;
+		}
+		ptr->cnt++;
+	}
+	else
+	{
+		ptr->width = ft_get_atr_nbr(str, ptr);
+	}
 }

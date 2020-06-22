@@ -1,37 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_print_nbr2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: antomart <antomart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/11 10:37:47 by antomart          #+#    #+#             */
-/*   Updated: 2020/06/15 20:26:35 by antomart         ###   ########.fr       */
+/*   Created: 2020/02/28 11:17:53 by antomart          #+#    #+#             */
+/*   Updated: 2020/06/22 14:27:34 by antomart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	long_int_min_spc(t_env *ptr)
 {
-	unsigned int		i;
-	unsigned char		*d;
-	unsigned const char	*s;
+	write(1, "2147483648", 10);
+	ptr->wr = ptr->wr + 10;
+}
 
-	i = 0;
-	d = (unsigned char *)dst;
-	s = (unsigned char *)src;
-	if (*d != '\0' || *s != '\0')
-	{
-		while (i < n)
-		{
-			d[i] = s[i];
-			i++;
-		}
-		return (dst);
-	}
+void	ft_print_nbr2(long nb, char c, t_env *ptr)
+{
+	if (ptr->prec == 0 && ptr->min == 1 && ptr->width != -1)
+		wr_inc_pr_spc(ptr);
 	else
 	{
-		return (0);
+		if (nb < 0)
+		{
+			nb = -(nb);
+			wr_inc_pr_min(ptr);
+		}
+		if (nb > 9)
+		{
+			ft_print_nbr((nb) / 10, ptr);
+			ft_print_nbr((nb) % 10, ptr);
+		}
+		else
+		{
+			c = (nb) + '0';
+			write(1, &c, 1);
+			(ptr->wr)++;
+		}
 	}
 }
